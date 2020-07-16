@@ -1,0 +1,7 @@
+name: Core
+version: @version@
+main: com.sopernetwork.core.Core
+prefix: SOPER
+authors: [Sornin]
+description: This is the core of Sopernetwork
+website: sopernetwork.com

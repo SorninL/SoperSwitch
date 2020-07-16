@@ -1,0 +1,7 @@
+name: Core
+version: 1.0-SNAPSHOT
+main: com.sopernetwork.core.Core
+prefix: SOPER
+authors: [Sornin]
+description: This is the core of Sopernetwork
+website: sopernetwork.com
