@@ -1,4 +1,4 @@
-package com.sopernetwork.core.Game;
+package com.sopernetwork.core.game;
 
 import com.sopernetwork.core.Core;
 import org.bukkit.Bukkit;
@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Game {
 
@@ -40,9 +41,21 @@ public class Game {
     }
 
     public void registerScheduler() {
-        Collection<? extends Player> players = this.onlinePlayers;
+        List<Player> players = this.onlinePlayers;
+        List<Player> processedPlayer = new ArrayList<Player>();
         Runnable teleportPlayers = () -> {
+            for(int i = 0; i<players.size();i++) {
+                if (players.get(i).getGameMode() == GameMode.SPECTATOR) {
 
+                    processedPlayer.add(players.get(i));
+                    players.remove(i);
+                }
+                if ((i+1) >= players.size()) {
+                    for (int j = 0; j<players.size();j++) {
+                        Player randomPlayer = players.get(ThreadLocalRandom.current().nextInt(0, players.size() + 1));
+                    }
+                }
+            }
 
 
 

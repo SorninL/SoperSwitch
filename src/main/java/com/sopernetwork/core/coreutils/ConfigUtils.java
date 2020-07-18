@@ -1,4 +1,4 @@
-package com.sopernetwork.core.CoreUtils;
+package com.sopernetwork.core.coreutils;
 
 import com.sopernetwork.core.Core;
 import org.bukkit.configuration.file.FileConfiguration;

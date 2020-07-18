@@ -1,4 +1,4 @@
-package com.sopernetwork.core.Events.Events;
+package com.sopernetwork.core.events.Events;
 
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
