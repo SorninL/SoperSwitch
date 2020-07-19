@@ -52,41 +52,19 @@ public class Game {
                 }
                 if ((i+1) >= players.size()) {
                     for (int j = 0; j<players.size();j++) {
-                        Player randomPlayer = players.get(ThreadLocalRandom.current().nextInt(0, players.size() + 1));
+                        Player initPlayer = players.get(j);
+                        if (initPlayer == null) continue;
+                        players.remove(j);
+                        int randomIndex = ThreadLocalRandom.current().nextInt(0, players.size() + 1);
+                        Player randomPlayer = players.get(randomIndex);
+                        players.remove(randomIndex);
+                        Location initPlayerLocation = initPlayer.getLocation();
+                        Location randomPlayerLocation = randomPlayer.getLocation();
+                        initPlayer.sendMessage("Switched with " + randomPlayer.getName());
+                        initPlayer.teleport(randomPlayerLocation);
+                        randomPlayer.sendMessage("Switched with " + initPlayer.getName());
+                        randomPlayer.teleport(initPlayerLocation);
                     }
-                }
-            }
-
-
-
-
-            if (players.size() <= 1) return;
-            Player firstPlayer;
-            Location firstLocation;
-            Player secondPlayer;
-            Location secondLocation ;
-            List<Player> playerTped = new ArrayList<Player>();
-            for (int i = 0; i < players.size(); i++) {
-                if (players.toArray()[i] == null) continue;
-                firstPlayer = (Player) players.toArray()[i];
-                if (firstPlayer.getGameMode().equals(GameMode.SPECTATOR)) continue;
-                if (playerTped.contains(firstPlayer)) continue;
-                firstLocation = firstPlayer.getLocation();
-
-                for (int j = 0; j < players.size(); i++) {
-                    if (players.toArray()[j] == null) continue;
-                    secondPlayer = (Player) players.toArray()[i];
-                    if (secondPlayer == firstPlayer) continue;
-                    if (secondPlayer.getGameMode().equals(GameMode.SPECTATOR)) continue;
-                    if (playerTped.contains(secondPlayer)) continue;
-                    secondLocation = secondPlayer.getLocation();
-                    firstPlayer.teleport(secondLocation);
-                    secondPlayer.teleport(firstLocation);
-                    firstPlayer.sendMessage("§cSwitch avec " + secondPlayer.getName());
-                    secondPlayer.sendMessage("§cSwitch avec " + firstPlayer.getName());
-                    playerTped.add(secondPlayer);
-                    playerTped.add(firstPlayer);
-                    break;
                 }
             }
         };
