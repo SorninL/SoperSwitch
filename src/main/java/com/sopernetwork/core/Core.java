@@ -1,5 +1,6 @@
 package com.sopernetwork.core;
 
+import com.sopernetwork.core.commands.Startgame;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -31,6 +32,7 @@ public class Core extends JavaPlugin {
     public void onEnable() {
         this.getCoreLogger().info("SOPER SWITCH ON");
         this.initConfig();
+        this.getCommand("startgame").setExecutor(new Startgame());
     }
 
     @Override

@@ -27,7 +27,7 @@ public class Game {
         Game.game = this;
     }
 
-    public Game GetGame() {
+    public static Game GetGame() {
         if (Game.game == null) {
             return new Game(Core.getInstance().getServer().getOnlinePlayers());
         } else {
@@ -37,16 +37,23 @@ public class Game {
 
     public void StartGame() {
         if (this.onlinePlayers.size() <= 1) return;
-        this.registerScheduler();
+        this.registerSchedulers();
     }
 
-    public void registerScheduler() {
+
+    public void registerSchedulers() {
         List<Player> players = this.onlinePlayers;
         List<Player> processedPlayer = new ArrayList<Player>();
+        List<Integer> ints = new ArrayList<Integer>();
+        ints.add(45);
         Runnable teleportPlayers = () -> {
+            int timerLastTime = ints.get(0);
+            if (timerLastTime > 10) return;
+            if (timerLastTime <= 10 && timerLastTime !=0) {
+                Core.getInstance().getServer().broadcastMessage("§cSwitch in " + timerLastTime + " s");
+            }
             for(int i = 0; i<players.size();i++) {
                 if (players.get(i).getGameMode() == GameMode.SPECTATOR) {
-
                     processedPlayer.add(players.get(i));
                     players.remove(i);
                 }
@@ -68,8 +75,7 @@ public class Game {
                 }
             }
         };
-        long timer = 45*20;
+        long timer = 20;
         this.repeatedTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(Core.getInstance(),teleportPlayers, 0,timer);
     }
-
 }
