@@ -5,3 +5,7 @@ prefix: SOPER
 authors: [Sornin]
 description: This is the core of Sopernetwork
 website: sopernetwork.com
+commands:
+  startgame:
+    description: Start the game once command is executed
+    usage: /startgame
